@@ -3,18 +3,23 @@
     ViewData["Title"] = "Books";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Books</h1>
-    <ul>
-        @foreach (Book book in Model)
-        {
-            <li>
-                <h2>@book.Title</h2>
-                <p>By @book.Author.Name</p>
-                <img width="200" src="@book.CoverPhotoUrl" alt="@book.Title" />
-                <p>@book.Blurb</p>
-                <p>@book.Isbn</p>
-            </li>
-        }
-    </ul>
-</div>
+<h1 class="display-4">Books</h1>
+<ul class="container">
+    @foreach (Book book in Model)
+    {
+        <li class="card">
+            <img
+                width="200"
+                src="@book.CoverPhotoUrl"
+                alt="@book.Title"
+                class="card-img-top"
+            />
+            <div class="card-body">
+                <h2 class="card-title">@book.Title</h2>
+                <p class="card-subtitle text-muted">By @book.Authors[0].Name</p>
+                <p class="card-text">@book.Blurb</p>
+                <p class="card-text">@book.Isbn</p>
+            </div>
+        </li>
+    }
+</ul>
