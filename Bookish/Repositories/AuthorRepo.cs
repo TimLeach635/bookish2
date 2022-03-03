@@ -1,19 +1,18 @@
 using Bookish.Models.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bookish.Repositories
 {
     public class AuthorRepo
     {
+        private BookishContext context = new BookishContext();
+
         public List<AuthorDbModel> GetAllAuthors()
         {
-            return new List<AuthorDbModel>
-            {
-                new AuthorDbModel
-                {
-                    Id = 1,
-                    Name = "Ursula K. Le Guin",
-                }
-            };
+            return context
+                .Authors
+                .Include(a => a.Books)
+                .ToList();
         }
     }
 }
