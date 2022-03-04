@@ -3,7 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Bookish.Repositories
 {
-    public class AuthorRepo
+    public interface IAuthorRepo
+    {
+        public List<AuthorDbModel> GetAllAuthors();
+    }
+
+    public class AuthorRepo : IAuthorRepo
     {
         private BookishContext context = new BookishContext();
 

@@ -2,17 +2,22 @@
 using Microsoft.AspNetCore.Mvc;
 using Bookish.Models;
 using Bookish.Services;
+using Bookish.Repositories;
 
 namespace Bookish.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private BookService _bookService = new BookService();
+    private readonly IBookService _bookService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(
+        ILogger<HomeController> logger,
+        IBookService bookService
+    )
     {
         _logger = logger;
+        _bookService = bookService;
     }
 
     public IActionResult Index()
