@@ -1,3 +1,5 @@
+using Bookish.Models.Database;
+
 namespace Bookish.Models
 {
     public class Book
@@ -7,5 +9,17 @@ namespace Bookish.Models
         public List<Author>? Authors { get; set; }
         public string? CoverPhotoUrl { get; set; }
         public string? Blurb { get; set; }
+
+        public Book() { }
+
+        public Book(BookDbModel bookDbModel)
+        {
+            Isbn = bookDbModel.Isbn;
+            Title = bookDbModel.Title;
+            CoverPhotoUrl = bookDbModel.CoverPhotoUrl;
+            Blurb = bookDbModel.Blurb;
+
+            Authors = bookDbModel.Authors?.Select(a => new Author(a)).ToList();
+        }
     }
 }

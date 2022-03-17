@@ -6,6 +6,7 @@ namespace Bookish.Repositories
     public interface IAuthorRepo
     {
         public List<AuthorDbModel> GetAllAuthors();
+        public AuthorDbModel CreateAuthor(AuthorDbModel newAuthor);
     }
 
     public class AuthorRepo : IAuthorRepo
@@ -18,6 +19,21 @@ namespace Bookish.Repositories
                 .Authors
                 .Include(a => a.Books)
                 .ToList();
+        }
+
+        public AuthorDbModel CreateAuthor(AuthorDbModel newAuthor)
+        {
+            // explicitly remove ID, as you're not allowed to specify it
+            var authorNoId = new AuthorDbModel
+            {
+                Name = newAuthor.Name,
+                AuthorPhotoUrl = newAuthor.AuthorPhotoUrl,
+            };
+
+            var insertedAuthorEntry = context.Authors.Add(authorNoId);
+            context.SaveChanges();
+
+            return insertedAuthorEntry.Entity;
         }
     }
 }
