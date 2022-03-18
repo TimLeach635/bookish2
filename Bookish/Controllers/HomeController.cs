@@ -11,14 +11,17 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IBookService _bookService;
+    private readonly IAuthorService _authorService;
 
     public HomeController(
         ILogger<HomeController> logger,
-        IBookService bookService
+        IBookService bookService,
+        IAuthorService authorService
     )
     {
         _logger = logger;
         _bookService = bookService;
+        _authorService = authorService;
     }
 
     public IActionResult Index()
@@ -39,6 +42,8 @@ public class HomeController : Controller
 
     public IActionResult CreateBookForm()
     {
+        var authors = _authorService.GetAllAuthors();
+        ViewBag.Authors = authors;
         return View();
     }
 
