@@ -4,6 +4,7 @@ namespace Bookish.Models
 {
     public class Author
     {
+        public int? Id { get; set; }
         public string? Name { get; set; }
         public string? AuthorPhotoUrl { get; set; }
 
@@ -11,6 +12,7 @@ namespace Bookish.Models
 
         public Author(AuthorDbModel authorDbModel)
         {
+            Id = authorDbModel.Id;
             Name = authorDbModel.Name;
             AuthorPhotoUrl = authorDbModel.AuthorPhotoUrl;
         }

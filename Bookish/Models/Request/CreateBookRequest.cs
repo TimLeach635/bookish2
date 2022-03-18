@@ -7,6 +7,6 @@ namespace Bookish.Models.Request
         public string? CoverPhotoUrl { get; set; }
         public string? Blurb { get; set; }
 
-        public List<string>? AuthorNames { get; set; }
+        public List<int>? AuthorIds { get; set; }
     }
 }
